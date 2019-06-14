@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """Demo of changing face on Misty II Field Trial via rerobots API
 
 Besides standard Python libraries, this example code requires
