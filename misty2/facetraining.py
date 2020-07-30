@@ -9,7 +9,11 @@ from queue import Queue
 import random
 from threading import Thread
 
+# https://requests.readthedocs.io/en/stable/
 import requests
+
+# https://pypi.org/project/websocket_client/
+# https://github.com/websocket-client/websocket-client.git
 import websocket
 
 
