@@ -76,7 +76,10 @@ class LearnAndTrack(object):
                 if isinstance(msg['message'], dict) and msg['message']['isProcessComplete']:
                     print('face training complete!')
             elif msg['eventName'] == self.recog_event_name:
-                print('detected: {}'.format(msg['message']))
+                if isinstance(msg['message'], str):
+                    print(msg['message'])
+                else:
+                    print('detected: {}'.format(msg['message']))
             else:
                 print('rx: {}'.format(msg))
 
