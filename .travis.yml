@@ -1,0 +1,18 @@
+language: python
+python:
+  - "3.6"
+  - "3.7"
+  - "3.8"
+
+before_install:
+  - pip install -r misty2/requirements.txt
+
+script:
+  - pylint -E misty2/mistyrest.py
+
+notifications:
+  email:
+    recipients:
+      - scott@rerobots.net
+    on_success: change
+    on_failure: always
