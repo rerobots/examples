@@ -1,4 +1,4 @@
 type: fixed_misty2
 
 script:
-  - curl http://10.34.54.1/api/battery
+  - curl -s http://10.34.54.1/api/battery
