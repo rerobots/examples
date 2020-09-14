@@ -11,6 +11,9 @@ before_install:
 script:
   - pylint -E misty2/mistyrest.py
 
+after_success:
+- if test "$TRAVIS_PULL_REQUEST" = "false"; then rerobots submit-ci-job --repo-branch $TRAVIS_BRANCH --repo-ref $TRAVIS_COMMIT XTiJi-7b_TuYLRrKtuusMA; fi
+
 notifications:
   email:
     recipients:
