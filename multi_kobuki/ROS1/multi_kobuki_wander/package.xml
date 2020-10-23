@@ -1,0 +1,17 @@
+<package>
+  <name>multi_kobuki_wander</name>
+  <version>0.0.0</version>
+  <description>https://help.rerobots.net/workspaces/multi_kobuki.html https://vimeo.com/465989844</description>
+  <author email="q@rerobots.net">rerobots, Inc.</author>
+  <maintainer email="q@rerobots.net">Scott C. Livingston</maintainer>
+  <license>Apache 2.0</license>
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>rospy</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>kobuki_msgs</build_depend>
+
+  <run_depend>rospy</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>kobuki_msgs</run_depend>
+</package>

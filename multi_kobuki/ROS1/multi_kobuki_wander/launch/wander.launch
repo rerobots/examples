@@ -1,0 +1,6 @@
+<launch>
+  <include file="$(find kobuki_node)/launch/robot_with_tf.launch" />
+  <node name="scanner_static_transform" pkg="tf" type="static_transform_publisher" args="0 .05 .05 0 0 0 base_link laser 100" />
+  <node name="urg_node" pkg="urg_node" type="urg_node" />
+  <node name="multi_kobuki_wander" pkg="multi_kobuki_wander" type="rev.py" />
+</launch>

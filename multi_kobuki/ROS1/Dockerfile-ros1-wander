@@ -1,0 +1,10 @@
+# SCL <scott@rerobots.net>
+# Copyright (C) 2020 rerobots, Inc.
+
+FROM rerobots/workspaces-multi_kobuki:latest
+
+RUN mkdir -p /root/sandbox_ws/src
+COPY multi_kobuki_wander /root/sandbox_ws/src/multi_kobuki_wander
+RUN bash -c 'source /opt/ros/melodic/setup.bash && cd /root/sandbox_ws/src && catkin_init_workspace && cd .. && catkin_make'
+
+CMD ["/usr/sbin/sshd", "-D"]
