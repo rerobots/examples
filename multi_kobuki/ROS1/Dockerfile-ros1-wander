@@ -1,3 +1,8 @@
+#
+# This Dockerfile builds on
+# src/multi_kobuki/Dockerfile
+# of the workspaces repository (https://github.com/rerobots/workspaces.git)
+#
 # SCL <scott@rerobots.net>
 # Copyright (C) 2020 rerobots, Inc.
 
