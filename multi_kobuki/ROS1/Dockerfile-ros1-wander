@@ -12,4 +12,6 @@ RUN mkdir -p /root/sandbox_ws/src
 COPY multi_kobuki_wander /root/sandbox_ws/src/multi_kobuki_wander
 RUN bash -c 'source /opt/ros/melodic/setup.bash && cd /root/sandbox_ws/src && catkin_init_workspace && cd .. && catkin_make'
 
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install ros-melodic-rosbridge-suite
+
 CMD ["/usr/sbin/sshd", "-D"]
