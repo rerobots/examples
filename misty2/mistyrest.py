@@ -64,3 +64,44 @@ res = requests.post(MPURL + '/api/led', json={
     'blue': 255,
 })
 assert res.ok, 'response from POST /api/led: {} {}'.format(res.status_code, res.reason)
+
+
+# Move the arms
+# https://docs.mistyrobotics.com/misty-ii/web-api/api-reference/#movearms
+res = requests.post(MPURL + '/api/arms/set', json={
+    'LeftArmPosition': -20,
+    'RightArmPosition': -20,
+    'LeftArmVelocity': 40,
+    'RightArmVelocity': 40,
+})
+assert res.ok, 'response from POST /api/arms/set: {} {}'.format(res.status_code, res.reason)
+
+# Sleep for 2 seconds to allow arms to complete motion
+time.sleep(2)
+
+res = requests.post(MPURL + '/api/arms/set', json={
+    'LeftArmPosition': 90,
+    'RightArmPosition': 90,
+    'LeftArmVelocity': 40,
+    'RightArmVelocity': 40,
+})
+assert res.ok, 'response from POST /api/arms/set: {} {}'.format(res.status_code, res.reason)
+
+
+def drive_fwd(mpurl, duration):
+    """Drive forward for given duration (ms)
+    """
+    params = {
+        'LinearVelocity': 15,
+        'AngularVelocity': 0,
+        'TimeMS': duration,
+    }
+    res = requests.post(mpurl + '/api/drive/time', json=params)
+    if not res.ok:
+        print('response from POST /api/drive/time:',
+              res.status_code,
+              res.reason)
+
+# Drive forward for 2 seconds (2000 milliseconds)
+drive_fwd(mpurl, 2000)
+time.sleep(2)
