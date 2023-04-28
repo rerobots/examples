@@ -1,7 +1,7 @@
 <package>
   <name>multi_kobuki_wander</name>
   <version>0.0.0</version>
-  <description>https://help.rerobots.net/workspaces/multi_kobuki.html https://vimeo.com/465989844</description>
+  <description>https://docs.rerobots.net/workspaces/multi_kobuki https://vimeo.com/465989844</description>
   <author email="q@rerobots.net">rerobots, Inc.</author>
   <maintainer email="q@rerobots.net">Scott C. Livingston</maintainer>
   <license>Apache 2.0</license>

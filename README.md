@@ -6,7 +6,7 @@ Introduction
 
 This repository contains examples about [rerobots](https://rerobots.net).
 Tutorials, instructions, details about the API, etc. are available on the main
-documentation website at https://help.rerobots.net/
+documentation website at https://docs.rerobots.net/
 
 
 Participating
