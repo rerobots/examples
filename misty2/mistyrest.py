@@ -103,5 +103,5 @@ def drive_fwd(mpurl, duration):
               res.reason)
 
 # Drive forward for 2 seconds (2000 milliseconds)
-drive_fwd(mpurl, 2000)
+drive_fwd(MPURL, 2000)
 time.sleep(2)
