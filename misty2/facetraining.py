@@ -18,36 +18,48 @@ import websocket
 
 
 def on_open(ws, recog_event_name, training_event_name):
-    ws.send(json.dumps({
-        'Operation': 'subscribe',
-        'Type': 'FaceRecognition',
-        'DebounceMS': None,
-        'EventName': recog_event_name,
-        'Message': '',
-        'ReturnProperty': None,
-    }))
-    ws.send(json.dumps({
-        'Operation': 'subscribe',
-        'Type': 'FaceTraining',
-        'DebounceMS': None,
-        'EventName': training_event_name,
-        'Message': '',
-        'ReturnProperty': None,
-    }))
+    ws.send(
+        json.dumps(
+            {
+                'Operation': 'subscribe',
+                'Type': 'FaceRecognition',
+                'DebounceMS': None,
+                'EventName': recog_event_name,
+                'Message': '',
+                'ReturnProperty': None,
+            }
+        )
+    )
+    ws.send(
+        json.dumps(
+            {
+                'Operation': 'subscribe',
+                'Type': 'FaceTraining',
+                'DebounceMS': None,
+                'EventName': training_event_name,
+                'Message': '',
+                'ReturnProperty': None,
+            }
+        )
+    )
+
 
 def on_message(ws, msg, q):
     q.put(json.loads(msg))
 
+
 def main_ws(mpurl, hon_open, hon_message):
-    ws = websocket.WebSocketApp(mpurl + '/pubsub', on_open=hon_open, on_message=hon_message)
+    ws = websocket.WebSocketApp(
+        mpurl + '/pubsub', on_open=hon_open, on_message=hon_message
+    )
     ws.run_forever()
 
 
 class LearnAndTrack(object):
     def __init__(self, mpurl):
         self.mpurl = mpurl
-        self.recog_event_name = 'fr{}'.format(random.randint(0,1000))
-        self.training_event_name = 'tr{}'.format(random.randint(0,1000))
+        self.recog_event_name = 'fr{}'.format(random.randint(0, 1000))
+        self.training_event_name = 'tr{}'.format(random.randint(0, 1000))
 
     def clear_past(self):
         assert requests.post(self.mpurl + '/api/faces/detection/stop').ok
@@ -65,15 +77,24 @@ class LearnAndTrack(object):
 
     def start(self):
         assert requests.post(self.mpurl + '/api/faces/recognition/start').ok
-        assert requests.post(self.mpurl + '/api/faces/training/start', json={'FaceId': 'neighbour'}).ok
+        assert requests.post(
+            self.mpurl + '/api/faces/training/start', json={'FaceId': 'neighbour'}
+        ).ok
         q = Queue()
-        hon_open = functools.partial(on_open, recog_event_name=self.recog_event_name, training_event_name=self.training_event_name)
+        hon_open = functools.partial(
+            on_open,
+            recog_event_name=self.recog_event_name,
+            training_event_name=self.training_event_name,
+        )
         hon_message = functools.partial(on_message, q=q)
         th = self.start_ws(hon_open, hon_message)
         while True:
             msg = q.get()
             if msg['eventName'] == self.training_event_name:
-                if isinstance(msg['message'], dict) and msg['message']['isProcessComplete']:
+                if (
+                    isinstance(msg['message'], dict)
+                    and msg['message']['isProcessComplete']
+                ):
                     print('face training complete!')
             elif msg['eventName'] == self.recog_event_name:
                 if isinstance(msg['message'], str):
