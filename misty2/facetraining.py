@@ -87,7 +87,7 @@ class LearnAndTrack(object):
             training_event_name=self.training_event_name,
         )
         hon_message = functools.partial(on_message, q=q)
-        th = self.start_ws(hon_open, hon_message)
+        self.start_ws(hon_open, hon_message)
         while True:
             msg = q.get()
             if msg['eventName'] == self.training_event_name:
